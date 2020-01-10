@@ -25,8 +25,6 @@ instance Eq Conn where
 data Maze = Maze {width::Int, height::Int,
                   connections::[Conn]} deriving Show
 
---change the way your maze looks!
-
 vwall :: Maze -> Cell -> Bool
 vwall maze (x, y) =
   not $ (Conn (x, y-1) (x, y)) `elem` connections maze
@@ -71,7 +69,6 @@ getNeighbours m cc = [(x,y) | i <- [-1..1], j <- [-1..1], i == 0 || j == 0, not 
 addConn :: Maze -> Cell -> Cell -> Maze
 addConn (Maze w h conns) c1 c2 = Maze w h $ (Conn c1 c2):conns
 
--- Maze, current cell, touched cells -> Maze, touched cells
 rbMaze :: StdGen -> Maze -> Cell -> (Maze, StdGen)
 rbMaze g m cc = 
   let
